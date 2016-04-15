@@ -1,4 +1,5 @@
-package com.zfl.nce;
+package com.zfl.file;
+
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ReadXML
 {
 	public  static ArrayList<String> nameList = new ArrayList<>();
 	public  static ArrayList<String> contentList = new ArrayList<>();
+	public  static ArrayList<String> wordsList = new ArrayList<>();
 	
 	public void readXml(InputStream is)
 	{
@@ -43,6 +45,8 @@ public class ReadXML
 							nameList.add(value);
 						}else if (name.equals("CONTENT")) {
 							contentList.add(value);
+						}else if (name.equals("WORDS")) {
+							wordsList.add(value);
 						}										
 					}					
 				}

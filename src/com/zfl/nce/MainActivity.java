@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.zfl.nce.R;
+import com.zfl.R;
+import com.zfl.file.ReadXML;
+import com.zfl.file.ToXML;
+import com.zfl.file.WordsFileRead;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,11 +33,16 @@ public class MainActivity extends Activity {
 		//先将txt转成xml文件。
 		String txtname = "txtdata.txt";
 		String xmlname = "xmldata.xml";
-		File file = new File(Environment.getExternalStorageDirectory(),txtname);
-    	File file2 = new File(Environment.getExternalStorageDirectory(),xmlname);
+		String wordname = "nce4_words";
+		File file_txt = new File(Environment.getExternalStorageDirectory(),txtname);
+    	File file_xml = new File(Environment.getExternalStorageDirectory(),xmlname);
+    	File file_words = new File(Environment.getExternalStorageDirectory(),wordname);
+    	//將txt轉成xml
 		ToXML toXML = new ToXML();
-		toXML.doit(file,file2);
-		
+		toXML.doit(file_txt,file_xml);
+		//將單詞解析出來，放在map中
+		WordsFileRead wfr = new WordsFileRead();
+		wfr.read(file_words,null);
 		//解析xml，从中提取LESSON和CONTENT两个标签，显示在listview中。
 		try {
 			InputStream is = getAssets().open("xmldata.xml");
@@ -43,6 +51,9 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//解析nct4_words文件，將其放在map裡面，其中key是單詞，value是單詞等級
+		
 
 		ListView listView = (ListView) findViewById(R.id.listView);
 		MyAdapter adapter = new MyAdapter(this);

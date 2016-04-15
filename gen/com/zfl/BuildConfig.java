@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package com.zfl.nce;
+package com.zfl;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;
